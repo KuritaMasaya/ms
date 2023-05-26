@@ -3,7 +3,6 @@ from fastapi import FastAPI
 
 app = FastAPI(
     title='ms'
-
 )
 
 @app.get("/")

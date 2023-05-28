@@ -6,6 +6,9 @@ from pymongo import MongoClient
 # from fastapi.responses import FileResponse
 # from niconico import NicoNico
 # import glob
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+
 load_dotenv()
 
 app = FastAPI(
@@ -26,6 +29,14 @@ def read_root():
 @app.get("/status")
 def read_root():
     return {"status": 200, "stat": "ok"}
+
+@app.get("/spotify")
+def spotify_root():
+    sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=os.getenv('spotify_client_secret'),
+                                               client_secret=os.getenv('spotify_client_id')))
+
+    results = sp.current_user_top_tracks(limit=5, offset=0, time_range='medium_term')
+    return results
 
 # @app.get("/nicodl/{sm}")
 # def read_root(sm: int):

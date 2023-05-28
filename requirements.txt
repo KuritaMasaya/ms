@@ -2,3 +2,4 @@ python-dotenv==1.0.0
 fastapi==0.89.1
 uvicorn==0.22.0
 pymongo==4.3.3
+spotipy==2.23.0
